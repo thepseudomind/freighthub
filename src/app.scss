@@ -1,0 +1,26 @@
+*, *::before, *::after{
+    padding: 0;
+    margin: 0;
+    box-sizing: inherit;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+html{
+    font-size: 62.5%;
+}
+
+body{
+    box-sizing: border-box;
+    font-family: 'Spartan', Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #FEF3DC;
+    padding: 5rem;
+
+    & > *{
+        background-color: white;
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 0 5rem .5rem rgba(black , .2);
+    }
+}

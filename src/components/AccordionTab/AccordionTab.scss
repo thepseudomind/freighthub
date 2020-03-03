@@ -1,0 +1,42 @@
+.accordion{
+    &__tab{
+        width: 30rem;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: column;
+
+        & > *{
+            width: 100%;
+            font-size: 1.5rem;
+            
+            &:first-child{
+                padding: 1rem 0;
+            }
+        }
+
+        &--title{
+            background-color: #F8F8F8;
+            color: #717171;
+            cursor: pointer;
+        }
+    
+        &--content{
+            height: 0rem;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            background-color: #F6EBD5;
+            visibility: hidden;
+            opacity: 0;
+            transition: all .2s ease;
+
+            &.active{
+                height: 7rem;
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+    }
+}

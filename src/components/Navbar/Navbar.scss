@@ -1,0 +1,80 @@
+.navbar{
+    height: 7.5rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: .25rem solid #f7f7f7;
+
+    &__logo{
+        color: #FBAF3A;
+
+        &:link, &:active{
+            text-transform: uppercase;
+            text-decoration: none;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+    }
+
+    &__menu{
+        list-style: none;
+
+        &--items{
+            display: inline-block;
+
+            &:not(:last-child){
+                margin-right: 2rem;
+            }
+        }
+
+        &--link{
+            color: #7F7F7F;
+
+            & > *{
+                &:not(:last-child){
+                    margin-right: 1rem;
+                } 
+            }
+
+            &:link, &:active{
+                font-size: 1.25rem;
+                text-decoration: none;
+                text-transform: capitalize;
+                background-color: transparent;
+                padding: 1rem;
+            }
+
+            &:hover, &.active{
+                color: white;
+                background-color: #FBAF3A;
+                padding: 1rem;
+                border-radius: .5rem;
+            }
+        }
+    }
+
+    &__profile{
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        & > *{
+            &:not(:last-child){
+                margin-right: .75rem;
+            }
+        }
+
+        &--avatar{
+            height: 3rem;
+            width: 3rem;
+            border-radius: 50%;
+            border: .1rem solid rgba(black, .2);
+        }
+
+        &--user{
+            font-size: 1.25rem;
+            text-transform: capitalize;
+        }
+    }
+}
