@@ -51,7 +51,6 @@ const ShipmentPage : React.FunctionComponent = ()=>{
         }else{
             return `${process.env.SHIPMENT_API}/?_page=${pageToFetch}&_limit=20`; 
         }
-
     }
 
     const searchShipment = (e: any)=>{
@@ -59,7 +58,7 @@ const ShipmentPage : React.FunctionComponent = ()=>{
             startSearch(true);
             let searchResults = [];
             searchResults = shipments.filter((v: ShipmentObject, i)=>{
-                if(v.name.toLowerCase().includes(e.target.value)){
+                if(v.id.toLowerCase().includes(e.target.value) || v.id.includes(e.target.value)){
                     return v;
                 }
             });
@@ -96,9 +95,9 @@ const ShipmentPage : React.FunctionComponent = ()=>{
                         </select>
                     </span>
                 </div>
-                <input type="search" onChange={searchShipment} className="shipments__search" placeholder="Search for shipments by name"/>
+                <input type="search" onChange={searchShipment} className="shipments__search" placeholder="Search for shipments by ID e.g. S1009"/>
             </Row>
-            <ShipmentTable shipments={filteredShipments}/>
+            {filteredShipments.length === 0 ? <h1 className="shipments__error">No shipments found...<span>😢</span></h1> : <ShipmentTable shipments={filteredShipments}/>}
             <Paginator pages={numOfPages} setPage={setPage} pageToFetch={pageToFetch} searchMode={searchMode}/>
         </section>
     );

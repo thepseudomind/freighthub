@@ -4,7 +4,7 @@ import './home.scss';
 const HomePage : React.FunctionComponent = ()=>{
     return (
         <section className="home">
-            <h1>Home</h1>
+            <h1>Check shipments page for all shipments. 😄</h1>
         </section>
     );
 }

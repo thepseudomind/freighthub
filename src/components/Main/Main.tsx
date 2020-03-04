@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import './Main.scss';
 import { Switch, Route } from 'react-router-dom';
+import HistoryPage from '../../pages/history/history';
 
 const HomePage = React.lazy(()=> import('../../pages/home/home'));
 const ShipmentPage = React.lazy(()=> import('../../pages/shipments/shipments'));
@@ -14,7 +15,7 @@ const Main : React.FunctionComponent = ()=>{
                     <Route exact path="/" component={HomePage}></Route>
                     <Route path="/shipments" component={ShipmentPage}></Route>
                     <Route path="/shipment/:id" component={ShipmentDetailPage}></Route>
-                    <Route path="/history" children={<h2 style={{textAlign: "center"}}>History</h2>}></Route>
+                    <Route path="/history" component={HistoryPage}></Route>
                 </Switch>
             </Suspense>
         </main>

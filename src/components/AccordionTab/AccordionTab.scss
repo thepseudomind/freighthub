@@ -1,6 +1,6 @@
 .accordion{
     &__tab{
-        width: 30rem;
+        width: 35rem;
         margin: 0 auto;
         display: flex;
         justify-content: space-around;
@@ -12,7 +12,7 @@
             font-size: 1.5rem;
             
             &:first-child{
-                padding: 1rem 0;
+                padding: 1rem 1.5rem;
             }
         }
 
@@ -20,6 +20,9 @@
             background-color: #F8F8F8;
             color: #717171;
             cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            text-transform: uppercase;
         }
     
         &--content{
@@ -28,14 +31,39 @@
             justify-content: center;
             flex-direction: column;
             background-color: #F6EBD5;
+            text-transform: uppercase;
             visibility: hidden;
             opacity: 0;
             transition: all .2s ease;
+
+            & > *{
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                padding: 0 1rem;
+                margin-top: .5rem;
+
+                & > *{
+                    &:last-child{
+                        text-align: end;
+                        justify-self: flex-end;
+                    }
+                }
+            }
 
             &.active{
                 height: 7rem;
                 visibility: visible;
                 opacity: 1;
+            }
+
+            &--title{
+               font-weight: 500; 
+               text-transform: uppercase;
+            }
+
+            &--info{
+                width: 2rem;
             }
         }
     }

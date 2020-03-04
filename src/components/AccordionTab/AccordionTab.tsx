@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import './AccordionTab.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleDown, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
-interface AccordionTabProps{
+export interface AccordionTabProps{
     title : string,
     message?: string,
     content?: any
@@ -13,7 +15,12 @@ const AccordionTab : React.FunctionComponent<AccordionTabProps> = ({title, messa
     const renderContent = ()=>{
         const details = [];
         for (const key in content) {
-           details.push(<p key={key}>{`${key}: ${content[key]}`}</p>); 
+           details.push(
+            <p key={key}>
+                <span className="accordion__tab--content--title">{key}:</span>
+                <span>{`${content[key]}`}</span>
+            </p>
+           ); 
         }
         return details;
     }
@@ -21,7 +28,8 @@ const AccordionTab : React.FunctionComponent<AccordionTabProps> = ({title, messa
     return (
         <div className="accordion__tab">
             <div className="accordion__tab--title" onClick={()=>setTabStatus(!activeTab)}>
-                {title}
+                <span>{title}</span>
+                <FontAwesomeIcon icon={activeTab ? faAngleDown : faAngleRight}/>
             </div>
             <div className={`accordion__tab--content${activeTab ? ' active' : ''}`}>
                 {content ? renderContent() : message}

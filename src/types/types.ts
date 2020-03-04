@@ -7,6 +7,8 @@ export type ShipmentObject = {
     status: string,
     origin: string,
     destination: string,
+    userId: string,
+    services: [],
     cargo : []
 }
 

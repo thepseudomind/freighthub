@@ -32285,36 +32285,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/pages/home/home.scss":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/pages/home/home.tsx":[function(require,module,exports) {
-"use strict";
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var react_1 = __importDefault(require("react"));
-
-require("./home.scss");
-
-var HomePage = function HomePage() {
-  return react_1.default.createElement("section", {
-    className: "home"
-  }, react_1.default.createElement("h1", null, "Home"));
-};
-
-exports.default = HomePage;
-},{"react":"../node_modules/react/index.js","./home.scss":"../src/pages/home/home.scss"}],"../src/pages/shipments/shipments.scss":[function(require,module,exports) {
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/pages/history/history.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -32364,7 +32335,98 @@ var ShipmentTable = function ShipmentTable(_a) {
 };
 
 exports.default = ShipmentTable;
-},{"react":"../node_modules/react/index.js","./ShipmentTable.scss":"../src/components/ShipmentTable/ShipmentTable.scss","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"../src/components/Paginator/Paginator.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./ShipmentTable.scss":"../src/components/ShipmentTable/ShipmentTable.scss","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"../src/pages/history/history.tsx":[function(require,module,exports) {
+"use strict";
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+  }
+  result["default"] = mod;
+  return result;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var react_1 = __importStar(require("react"));
+
+require("./history.scss");
+
+var ShipmentTable_1 = __importDefault(require("../../components/ShipmentTable/ShipmentTable"));
+
+var HistoryPage = function HistoryPage() {
+  // Assuming the user has an ID of U1000
+  var _a = react_1.useState([]),
+      usersShipment = _a[0],
+      fetchShipment = _a[1];
+
+  react_1.useEffect(function () {
+    fetch("" + "http://localhost:3000/shipments").then(function (res) {
+      return res.json();
+    }).then(function (data) {
+      var userData = data.filter(function (v, i) {
+        if (v.userId = 'U1000') {
+          return v;
+        }
+      });
+      fetchShipment(userData);
+    });
+  }, []);
+  return react_1.default.createElement("div", {
+    className: "history"
+  }, react_1.default.createElement("h1", {
+    className: "history__heading"
+  }, "My shipments"), react_1.default.createElement(ShipmentTable_1.default, {
+    shipments: usersShipment
+  }));
+};
+
+exports.default = HistoryPage;
+},{"react":"../node_modules/react/index.js","./history.scss":"../src/pages/history/history.scss","../../components/ShipmentTable/ShipmentTable":"../src/components/ShipmentTable/ShipmentTable.tsx"}],"../src/pages/home/home.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/pages/home/home.tsx":[function(require,module,exports) {
+"use strict";
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var react_1 = __importDefault(require("react"));
+
+require("./home.scss");
+
+var HomePage = function HomePage() {
+  return react_1.default.createElement("section", {
+    className: "home"
+  }, react_1.default.createElement("h1", null, "Check shipments page for all shipments. \uD83D\uDE04"));
+};
+
+exports.default = HomePage;
+},{"react":"../node_modules/react/index.js","./home.scss":"../src/pages/home/home.scss"}],"../src/pages/shipments/shipments.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/components/Paginator/Paginator.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -42174,7 +42236,7 @@ var ShipmentPage = function ShipmentPage() {
       startSearch(true);
       var searchResults = [];
       searchResults = shipments.filter(function (v, i) {
-        if (v.name.toLowerCase().includes(e.target.value)) {
+        if (v.id.toLowerCase().includes(e.target.value) || v.id.includes(e.target.value)) {
           return v;
         }
       });
@@ -42235,8 +42297,10 @@ var ShipmentPage = function ShipmentPage() {
     type: "search",
     onChange: searchShipment,
     className: "shipments__search",
-    placeholder: "Search for shipments by name"
-  })), react_1.default.createElement(ShipmentTable_1.default, {
+    placeholder: "Search for shipments by ID e.g. S1009"
+  })), filteredShipments.length === 0 ? react_1.default.createElement("h1", {
+    className: "shipments__error"
+  }, "No shipments found...", react_1.default.createElement("span", null, "\uD83D\uDE22")) : react_1.default.createElement(ShipmentTable_1.default, {
     shipments: filteredShipments
   }), react_1.default.createElement(Paginator_1.default, {
     pages: numOfPages,
@@ -42277,7 +42341,9 @@ require("./Accordion.scss");
 var Accordion = function Accordion(props) {
   return react_1.default.createElement("div", {
     className: "accordion"
-  }, props.children);
+  }, react_1.default.createElement("h1", {
+    className: "accordion__heading"
+  }, props.title), props.children);
 };
 
 exports.default = Accordion;
@@ -42307,6 +42373,10 @@ var react_1 = __importStar(require("react"));
 
 require("./AccordionTab.scss");
 
+var react_fontawesome_1 = require("@fortawesome/react-fontawesome");
+
+var free_solid_svg_icons_1 = require("@fortawesome/free-solid-svg-icons");
+
 var AccordionTab = function AccordionTab(_a) {
   var title = _a.title,
       message = _a.message,
@@ -42322,7 +42392,9 @@ var AccordionTab = function AccordionTab(_a) {
     for (var key in content) {
       details.push(react_1.default.createElement("p", {
         key: key
-      }, key + ": " + content[key]));
+      }, react_1.default.createElement("span", {
+        className: "accordion__tab--content--title"
+      }, key, ":"), react_1.default.createElement("span", null, "" + content[key])));
     }
 
     return details;
@@ -42335,13 +42407,51 @@ var AccordionTab = function AccordionTab(_a) {
     onClick: function onClick() {
       return setTabStatus(!activeTab);
     }
-  }, title), react_1.default.createElement("div", {
+  }, react_1.default.createElement("span", null, title), react_1.default.createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: activeTab ? free_solid_svg_icons_1.faAngleDown : free_solid_svg_icons_1.faAngleRight
+  })), react_1.default.createElement("div", {
     className: "accordion__tab--content" + (activeTab ? ' active' : '')
   }, content ? renderContent() : message));
 };
 
 exports.default = AccordionTab;
-},{"react":"../node_modules/react/index.js","./AccordionTab.scss":"../src/components/AccordionTab/AccordionTab.scss"}],"../src/pages/shipmentDetail/shipmentDetail.tsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./AccordionTab.scss":"../src/components/AccordionTab/AccordionTab.scss","@fortawesome/react-fontawesome":"../node_modules/@fortawesome/react-fontawesome/index.es.js","@fortawesome/free-solid-svg-icons":"../node_modules/@fortawesome/free-solid-svg-icons/index.es.js"}],"../src/components/DetailCard/DetailCard.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/components/DetailCard/DetailCard.tsx":[function(require,module,exports) {
+"use strict";
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var react_1 = __importDefault(require("react"));
+
+require("./DetailCard.scss");
+
+var DetailCard = function DetailCard(_a) {
+  var title = _a.title,
+      info = _a.info,
+      reduceSubtitle = _a.reduceSubtitle;
+  return react_1.default.createElement("div", {
+    className: "detail__card"
+  }, react_1.default.createElement("div", {
+    className: "detail__card--title"
+  }, title), react_1.default.createElement("div", {
+    className: "detail__card--subtitle" + (reduceSubtitle ? ' long' : '')
+  }, info));
+};
+
+exports.default = DetailCard;
+},{"react":"../node_modules/react/index.js","./DetailCard.scss":"../src/components/DetailCard/DetailCard.scss"}],"../src/pages/shipmentDetail/shipmentDetail.tsx":[function(require,module,exports) {
 "use strict";
 
 var __importStar = this && this.__importStar || function (mod) {
@@ -42372,8 +42482,15 @@ var Accordion_1 = __importDefault(require("../../components/Accordion/Accordion"
 
 var AccordionTab_1 = __importDefault(require("../../components/AccordionTab/AccordionTab"));
 
+var DetailCard_1 = __importDefault(require("../../components/DetailCard/DetailCard"));
+
+var react_fontawesome_1 = require("@fortawesome/react-fontawesome");
+
+var free_solid_svg_icons_1 = require("@fortawesome/free-solid-svg-icons");
+
 var ShipmentDetailPage = function ShipmentDetailPage(_a) {
-  var match = _a.match;
+  var match = _a.match,
+      history = _a.history;
 
   var _b = react_1.useState({
     id: "",
@@ -42384,10 +42501,20 @@ var ShipmentDetailPage = function ShipmentDetailPage(_a) {
     status: "",
     origin: "",
     destination: "",
+    userId: "",
+    services: [],
     cargo: []
   }),
       shipmentDetail = _b[0],
       setShipment = _b[1];
+
+  var _c = react_1.useState(false),
+      editMode = _c[0],
+      toggleEdit = _c[1];
+
+  var _d = react_1.useState(''),
+      newName = _d[0],
+      setName = _d[1];
 
   react_1.useEffect(function () {
     fetch("http://localhost:3000/shipments" + "/" + match.params.id).then(function (res) {
@@ -42395,23 +42522,116 @@ var ShipmentDetailPage = function ShipmentDetailPage(_a) {
     }).then(function (data) {
       return setShipment(data);
     });
-  }, []);
+  }, [shipmentDetail.name]);
+
+  var updateName = function updateName(newName) {
+    var dataToPost = {
+      name: newName
+    };
+    fetch("http://localhost:3000/shipments" + "/" + match.params.id, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(dataToPost)
+    }).then(function (res) {
+      res.json();
+      toggleEdit(false);
+      setShipment(Object.assign({}, shipmentDetail, {
+        name: newName
+      }));
+    });
+  };
+
   return react_1.default.createElement("section", {
     className: "shipment__detail"
-  }, react_1.default.createElement("h1", null, shipmentDetail.name), react_1.default.createElement(Accordion_1.default, null, shipmentDetail.cargo.map(function (v, i) {
+  }, react_1.default.createElement("div", {
+    className: "shipment__detail--row center"
+  }, react_1.default.createElement("div", {
+    className: "shipment__edit",
+    onClick: history.goBack
+  }, react_1.default.createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: free_solid_svg_icons_1.faArrowLeft,
+    size: "2x"
+  })), editMode ? react_1.default.createElement("form", null, react_1.default.createElement("input", {
+    type: "text",
+    defaultValue: shipmentDetail.name,
+    className: "shipment__input",
+    onChange: function onChange(e) {
+      if (e.target.value !== '') setName(e.target.value);
+    }
+  }), react_1.default.createElement("a", {
+    href: "#",
+    onClick: function onClick() {
+      return updateName(newName);
+    },
+    className: "shipment__button"
+  }, "Submit")) : react_1.default.createElement("h1", {
+    className: "shipment__heading"
+  }, shipmentDetail.name), react_1.default.createElement("div", {
+    className: "shipment__edit",
+    onClick: function onClick() {
+      return toggleEdit(!editMode);
+    }
+  }, react_1.default.createElement(react_fontawesome_1.FontAwesomeIcon, {
+    icon: editMode ? free_solid_svg_icons_1.faTimes : free_solid_svg_icons_1.faPencilAlt,
+    size: "2x"
+  }))), react_1.default.createElement("div", {
+    className: "shipment__detail--row"
+  }, react_1.default.createElement(DetailCard_1.default, {
+    title: "id",
+    info: shipmentDetail.id
+  }), react_1.default.createElement(DetailCard_1.default, {
+    title: "userId",
+    info: shipmentDetail.userId
+  }), react_1.default.createElement(DetailCard_1.default, {
+    title: "mode",
+    info: shipmentDetail.mode
+  }), react_1.default.createElement(DetailCard_1.default, {
+    title: "type",
+    info: shipmentDetail.type
+  }), react_1.default.createElement(DetailCard_1.default, {
+    title: "total",
+    info: shipmentDetail.total
+  }), react_1.default.createElement(DetailCard_1.default, {
+    title: "status",
+    info: shipmentDetail.status
+  })), react_1.default.createElement("div", {
+    className: "shipment__detail--row"
+  }, react_1.default.createElement(DetailCard_1.default, {
+    title: "status",
+    info: shipmentDetail.origin,
+    reduceSubtitle: true
+  }), react_1.default.createElement(DetailCard_1.default, {
+    title: "status",
+    info: shipmentDetail.destination,
+    reduceSubtitle: true
+  }), react_1.default.createElement(Accordion_1.default, {
+    title: "services"
+  }, shipmentDetail.services.map(function (v, i) {
     return react_1.default.createElement(AccordionTab_1.default, {
-      key: v.type,
+      key: i,
+      title: "service",
+      content: {
+        type: v.type
+      }
+    });
+  })), react_1.default.createElement(Accordion_1.default, {
+    title: "cargo"
+  }, shipmentDetail.cargo.map(function (v, i) {
+    return react_1.default.createElement(AccordionTab_1.default, {
+      key: i,
       title: v.type,
       content: {
         description: v.description,
         volume: v.volume
       }
     });
-  })), console.log(shipmentDetail));
+  }))));
 };
 
 exports.default = ShipmentDetailPage;
-},{"react":"../node_modules/react/index.js","./shipmentDetail.scss":"../src/pages/shipmentDetail/shipmentDetail.scss","../../components/Accordion/Accordion":"../src/components/Accordion/Accordion.tsx","../../components/AccordionTab/AccordionTab":"../src/components/AccordionTab/AccordionTab.tsx"}],"../src/components/Main/Main.tsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./shipmentDetail.scss":"../src/pages/shipmentDetail/shipmentDetail.scss","../../components/Accordion/Accordion":"../src/components/Accordion/Accordion.tsx","../../components/AccordionTab/AccordionTab":"../src/components/AccordionTab/AccordionTab.tsx","../../components/DetailCard/DetailCard":"../src/components/DetailCard/DetailCard.tsx","@fortawesome/react-fontawesome":"../node_modules/@fortawesome/react-fontawesome/index.es.js","@fortawesome/free-solid-svg-icons":"../node_modules/@fortawesome/free-solid-svg-icons/index.es.js"}],"../src/components/Main/Main.tsx":[function(require,module,exports) {
 "use strict";
 
 var __importStar = this && this.__importStar || function (mod) {
@@ -42424,6 +42644,12 @@ var __importStar = this && this.__importStar || function (mod) {
   return result;
 };
 
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -42433,6 +42659,8 @@ var react_1 = __importStar(require("react"));
 require("./Main.scss");
 
 var react_router_dom_1 = require("react-router-dom");
+
+var history_1 = __importDefault(require("../../pages/history/history"));
 
 var HomePage = react_1.default.lazy(function () {
   return Promise.resolve().then(function () {
@@ -42467,16 +42695,12 @@ var Main = function Main() {
     component: ShipmentDetailPage
   }), react_1.default.createElement(react_router_dom_1.Route, {
     path: "/history",
-    children: react_1.default.createElement("h2", {
-      style: {
-        textAlign: "center"
-      }
-    }, "History")
+    component: history_1.default
   }))));
 };
 
 exports.default = Main;
-},{"react":"../node_modules/react/index.js","./Main.scss":"../src/components/Main/Main.scss","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","../../pages/home/home":"../src/pages/home/home.tsx","../../pages/shipments/shipments":"../src/pages/shipments/shipments.tsx","../../pages/shipmentDetail/shipmentDetail":"../src/pages/shipmentDetail/shipmentDetail.tsx"}],"../src/components/Navbar/Navbar.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./Main.scss":"../src/components/Main/Main.scss","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","../../pages/history/history":"../src/pages/history/history.tsx","../../pages/home/home":"../src/pages/home/home.tsx","../../pages/shipments/shipments":"../src/pages/shipments/shipments.tsx","../../pages/shipmentDetail/shipmentDetail":"../src/pages/shipmentDetail/shipmentDetail.tsx"}],"../src/components/Navbar/Navbar.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -42553,7 +42777,7 @@ var Navbar = function Navbar() {
     className: "navbar__profile--avatar"
   }), react_1.default.createElement("p", {
     className: "navbar__profile--user"
-  }, "milos mircov"), react_1.default.createElement(react_fontawesome_1.FontAwesomeIcon, {
+  }, "aline carmelini"), react_1.default.createElement(react_fontawesome_1.FontAwesomeIcon, {
     icon: free_solid_svg_icons_1.faCaretDown
   })));
 };
@@ -42617,7 +42841,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49159" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54635" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

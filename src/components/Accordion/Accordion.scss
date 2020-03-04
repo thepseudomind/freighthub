@@ -1,6 +1,12 @@
 .accordion{
-    margin-top: 2rem;
     display: inline-block;
     border-radius: .5rem;
     overflow: hidden;
+
+    &__heading{
+        font-size: 1.25rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin-bottom: .5rem;
+    }
 }

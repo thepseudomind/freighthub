@@ -31,7 +31,7 @@ const Navbar : React.FunctionComponent = ()=>{
             </ul>
             <div className="navbar__profile">
                 <img src={user} className="navbar__profile--avatar"/>
-                <p className="navbar__profile--user">milos mircov</p>
+                <p className="navbar__profile--user">aline carmelini</p>
                 <FontAwesomeIcon icon={faCaretDown}/>
             </div>
         </nav>
