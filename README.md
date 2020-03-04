@@ -52,5 +52,5 @@ To show test coverage, run `npm test -- --coverage --watchAll`. It will show cur
 
 ### Additional information
 
-I hope i can be given the chance to prove how much i can contribute to the company mooving forward... 
+I hope i can be given the chance to prove how much i can contribute to the company moving forward... 
 
